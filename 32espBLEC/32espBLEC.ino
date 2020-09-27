@@ -4,6 +4,7 @@
 // include reuired library
 #include<BLEDevice.h>
 #include<ArduinoJson.h>
+#include <WiFi.h>
 
 BLEScan* BLEscanner; // name the scanner
 static BLEAddress *deviceAddress;
@@ -13,7 +14,7 @@ static BLEAddress *deviceAddress;
 int currentList = 0;
 String maclist[maxOfList];
 
-int scanTimer = 2;
+int scanTimer = 5;
 
 // callback
 class BLEscannercallback : public BLEAdvertisedDeviceCallbacks
@@ -46,6 +47,8 @@ class BLEscannercallback : public BLEAdvertisedDeviceCallbacks
         Serial.print(currentList + 1);
         Serial.printf("\t MAC: ");
         Serial.print(mac2);
+        Serial.printf("\t ");
+        Serial.print(WiFi.macAddress());
         Serial.printf("\t RSSI: %0d", advertisedDevice.getRSSI());
         Serial.println();
         currentList++;
